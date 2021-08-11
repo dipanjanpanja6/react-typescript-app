@@ -2,12 +2,12 @@ import React, { useState } from "react"
 import "./App.css"
 
 function App() {
-  const [state, setState] = useState({ inputValue: "", option: [""] })
+  const [state, setState] = useState({ inputValue: "", option: [{ timestamp: "", value: "" }] })
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, inputValue: e.target.value })
   }
   const handleClick = () => {
-    setState({ ...state, option: [...state.option, new Date().toString()] })
+    setState({ ...state, option: [...state.option, { timestamp: new Date().toString(), value: state.inputValue }] })
   }
   const handleOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setState({ ...state, inputValue: e.target.value })
@@ -19,7 +19,7 @@ function App() {
       <br />
       <select onChange={handleOption}>
         {state.option.map(d => (
-          <option value={d}>{d}</option>
+          <option value={d.value}>{d.timestamp}</option>
         ))}
       </select>
     </div>
